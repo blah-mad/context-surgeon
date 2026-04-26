@@ -41,10 +41,15 @@ Current implementation includes:
 - Submission-facing `/demo` page is polished for recording: public preview starts from a fresh local sample-data state, sample-data proof is foregrounded, source view opens on signal instead of noise, live intake is collapsed behind a clear secondary callout, Qontext graph inspection opens in a modal, and desktop/mobile light/dark visual passes were checked.
 - D1 persistence now falls back to in-memory state if a local/preview runtime has a binding without initialized tables.
 
+Submission assets:
+
+- Public repository is live: `https://github.com/blah-mad/context-surgeon`.
+- A 60-second local walkthrough video was generated at `/Users/blah_mad/Desktop/context-surgeon-demo.mp4`. It still needs to be uploaded to Loom or another shareable host before final submission.
+
 Still not fully finished:
 
 - Current verification pass: landing/workbench UX, sample-data loop, graph modal, public API proof routes, protected unauthenticated failures, and browser demo-mode manual upload/promote were verified. API-route tests now cover unauthenticated workspace/export/integration protection and Composio public status. Still verify with a real signed-in Firebase browser session if credentials are available; this session's in-app browser showed signed-out state, so no OAuth/third-party permission prompts were opened. Do not store credentials or test-account details in the repo.
-- Submission video still needs to be produced/uploaded.
+- Submission video still needs to be uploaded/shared.
 
 The selected main project is `Context Surgeon`.
 
