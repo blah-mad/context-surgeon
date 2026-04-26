@@ -14,7 +14,7 @@ Public repository:
 
 Current deployed Worker version:
 
-`6437020a-4207-4036-a797-a12097afe84c`
+`70d0cb60-316d-4a4d-b47f-c8c1bf17f68e`
 
 Current implementation includes:
 
@@ -36,6 +36,7 @@ Current implementation includes:
 - Qontext export.
 - Qontext supplied-dataset proof for `Inazuma.co`: 12 domains, 153,997 counted records/artifacts, VFS and graph contract.
 - Live intake mode for Gmail, Outlook, HubSpot, Salesforce, Google Drive, OneDrive, Dropbox, SharePoint, Google Sheets, Notion, Slack, Teams, Zendesk, Intercom, Jira, Linear, and manual file upload.
+- Product-facing live upload API at `GET/POST /api/live/upload`; `GET` returns the contract and `POST` accepts authenticated multipart evidence files.
 - Live intake UI is split into `Sources`, `Automation`, and `Review` modes to keep the workbench focused.
 - Composio live mode is configured and verified for authenticated connector catalog, Gmail OAuth-link creation, sync normalization, ingestion-rule activation, manual upload normalization, and protected unauthenticated failures.
 - Submission-facing `/demo` page is polished for recording: public preview starts from a fresh local sample-data state, sample-data proof is foregrounded, source view opens on signal instead of noise, live intake is collapsed behind a clear secondary callout, Qontext graph inspection opens in a modal, and desktop/mobile light/dark visual passes were checked.
@@ -48,7 +49,7 @@ Submission assets:
 
 Still not fully finished:
 
-- Current verification pass: landing/workbench UX, sample-data loop, graph modal, public API proof routes, protected unauthenticated failures, and browser demo-mode manual upload/promote were verified. API-route tests now cover unauthenticated workspace/export/integration protection and Composio public status. Still verify with a real signed-in Firebase browser session if credentials are available; this session's in-app browser showed signed-out state, so no OAuth/third-party permission prompts were opened. Do not store credentials or test-account details in the repo.
+- Current verification pass: landing/workbench UX, sample-data loop, graph modal, public API proof routes, protected unauthenticated failures, live upload API contract, and browser demo-mode manual upload/promote were verified. API-route tests now cover unauthenticated workspace/export/integration protection, Composio public status, and `GET/POST /api/live/upload`. Still verify with a real signed-in Firebase browser session if credentials are available; this session's in-app browser showed signed-out state, so no OAuth/third-party permission prompts were opened. Do not store credentials or test-account details in the repo.
 - Submission video still needs to be uploaded/shared.
 
 The selected main project is `Context Surgeon`.

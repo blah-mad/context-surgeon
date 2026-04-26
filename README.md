@@ -98,6 +98,7 @@ below remain Firebase-protected for persisted D1 workspace operations.
 | `POST` | `/api/integrations/disconnect` | Disable a connected account | Firebase ID token |
 | `POST` | `/api/integrations/sync` | Fetch connected app records and normalize them into candidate sources | Firebase ID token |
 | `POST` | `/api/integrations/upload` | Normalize manual PDF, Word, TXT, CSV, JSON, Markdown, image, or export uploads | Firebase ID token |
+| `GET/POST` | `/api/live/upload` | Product-facing live API for file-to-candidate-source upload; `GET` returns the contract, `POST` accepts multipart files | Firebase ID token for `POST` |
 | `GET/POST` | `/api/integrations/rules` | Inspect or activate scoped ingestion rules for new email/file/CRM/ticket/work updates | Firebase ID token for activation |
 | `GET` | `/api/integrations/sources` | Return normalized connector source contract | Firebase ID token |
 
@@ -148,7 +149,7 @@ pnpm build
 pnpm cf:build
 ```
 
-Production verification completed on April 26, 2026 for Worker version `6437020a-4207-4036-a797-a12097afe84c`:
+Production verification completed on April 26, 2026 for Worker version `70d0cb60-316d-4a4d-b47f-c8c1bf17f68e`:
 
 - `GET /api/health` reports live provider and live integration mode.
 - `GET /api/providers/composio/status` reports 17 supported toolkits and configured Composio mode.
@@ -156,6 +157,7 @@ Production verification completed on April 26, 2026 for Worker version `6437020a
 - Authenticated live mode can create a Gmail OAuth link, normalize synced connector records into candidate sources, activate an ingestion rule, upload a manual evidence file, and read normalized source contracts.
 - The `/demo` guided loop was verified in the in-app browser: compile, human note, new email, Fact Patch, apply patch, and Agent Check all reach the expected visible states.
 - Manual upload was verified with a synthetic text file in browser demo mode; the file became a candidate source and was promoted into the compiler ledger.
+- `GET /api/live/upload` returns the product API contract, and unauthenticated `POST /api/live/upload` correctly returns `401`.
 
 Useful local API checks:
 
@@ -313,6 +315,13 @@ The product boundary is intentional:
 - Context Surgeon normalizes records into source documents, facts, provenance, conflicts, VFS files,
   and Fact Patches.
 - Public status routes expose missing environment variable names, never secrets.
+
+Product API surface for live mode:
+
+- `GET /api/live/upload` returns the upload contract and cURL example.
+- `POST /api/live/upload` accepts `multipart/form-data` with one or more `files`.
+- The response is the same candidate-source contract used by the live intake UI: source metadata, confidence, fact candidates, and next actions.
+- The endpoint requires a Firebase ID token so uploaded evidence remains scoped to the signed-in workspace.
 
 Detailed API and UI plan:
 

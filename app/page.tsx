@@ -119,6 +119,7 @@ function SiteNav() {
     ["Product", "#product"],
     ["Proof", "#proof"],
     ["Live mode", "#live-mode"],
+    ["API", "#api"],
     ["Trust", "#trust"]
   ];
 
@@ -731,6 +732,72 @@ function LiveModeSection() {
   );
 }
 
+function ApiSection() {
+  const code = [
+    "curl -X POST https://contextsurgeon.fnctn.io/api/live/upload \\",
+    "  -H 'Authorization: Bearer <FIREBASE_ID_TOKEN>' \\",
+    "  -F 'files=@owner-email.txt'"
+  ];
+
+  return (
+    <section id="api" className="surface-fill border-b border-border px-5 py-20 sm:px-6">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p className="text-sm font-semibold text-primary">Live API</p>
+          <h2 className="mt-3 max-w-2xl text-4xl font-semibold leading-tight text-fg sm:text-5xl">
+            Upload evidence without opening the UI.
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
+            The first product API is intentionally narrow: send files, receive normalized candidate
+            sources, then approve them into the same compiler, graph, and Fact Patch workflow.
+          </p>
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {[
+              ["01", "Upload files"],
+              ["02", "Review sources"],
+              ["03", "Compile patch"]
+            ].map(([step, label]) => (
+              <div key={step} className="bg-fill rounded-2xl border border-border p-4">
+                <p className="font-mono text-xs text-primary">{step}</p>
+                <p className="mt-2 text-sm font-semibold">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-[28px] border border-border bg-code p-5 text-cream shadow-2xl shadow-earth/10">
+          <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                POST /api/live/upload
+              </p>
+              <p className="mt-1 text-sm text-cream/60">multipart file intake for live mode</p>
+            </div>
+            <span className="rounded-full bg-[oklch(0.55_0.14_150_/_0.16)] px-3 py-1 text-xs font-semibold text-[oklch(0.72_0.14_150)]">
+              Firebase scoped
+            </span>
+          </div>
+          <pre className="mt-5 overflow-x-auto rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-7 text-cream/78">
+            <code>{code.join("\n")}</code>
+          </pre>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+              <UploadCloud className="size-4 text-primary" />
+              <p className="mt-3 text-sm font-semibold">Input</p>
+              <p className="mt-1 text-xs leading-5 text-cream/58">PDF, Word, text, CSV, JSON, Markdown, image, or exported evidence.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+              <FileCode2 className="size-4 text-primary" />
+              <p className="mt-3 text-sm font-semibold">Output</p>
+              <p className="mt-1 text-xs leading-5 text-cream/58">Candidate sources, confidence, fact hints, and next actions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TrustSection() {
   const points = [
     "Every fact carries a source quote.",
@@ -820,7 +887,8 @@ function SiteFooter() {
       links: [
         ["Overview", "#product"],
         ["Sample proof", "#proof"],
-        ["Live mode", "#live-mode"]
+        ["Live mode", "#live-mode"],
+        ["API", "#api"]
       ]
     },
     {
@@ -901,6 +969,7 @@ export default function Home() {
       <ProductSection />
       <ProofSection onOpenGraph={() => setGraphOpen(true)} />
       <LiveModeSection />
+      <ApiSection />
       <TrustSection />
       <FinalCta />
       <SiteFooter />

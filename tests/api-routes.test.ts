@@ -4,6 +4,7 @@ import { POST as workspaceAction } from "@/app/api/workspace/action/route";
 import { GET as workspaceExport } from "@/app/api/workspace/export/route";
 import { POST as integrationSync } from "@/app/api/integrations/sync/route";
 import { GET as composioStatus } from "@/app/api/providers/composio/status/route";
+import { GET as liveUploadDocs, POST as liveUpload } from "@/app/api/live/upload/route";
 
 describe("public and protected API route contracts", () => {
   it("rejects unauthenticated workspace mutations", async () => {
@@ -54,5 +55,31 @@ describe("public and protected API route contracts", () => {
     expect(payload.supportedToolkits.length).toBeGreaterThanOrEqual(4);
     expect(JSON.stringify(payload)).not.toContain("ak_");
     expect(JSON.stringify(payload)).not.toContain("COMPOSIO_API_KEY=");
+  });
+
+  it("documents the live upload API as a product endpoint", async () => {
+    const response = await liveUploadDocs();
+    const payload = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(payload.endpoint).toBe("POST /api/live/upload");
+    expect(payload.auth).toContain("Firebase ID token");
+    expect(payload.example).toContain("contextsurgeon.fnctn.io/api/live/upload");
+  });
+
+  it("rejects unauthenticated live upload API calls", async () => {
+    const form = new FormData();
+    form.append("files", new File(["synthetic evidence"], "evidence.txt", { type: "text/plain" }));
+
+    const response = await liveUpload(
+      new NextRequest("https://contextsurgeon.test/api/live/upload", {
+        method: "POST",
+        body: form
+      })
+    );
+    const payload = await response.json();
+
+    expect(response.status).toBe(401);
+    expect(payload).toMatchObject({ ok: false });
   });
 });

@@ -198,6 +198,36 @@ files are accepted with filename/type/size provenance and can be enriched by the
 
 Response shape is the same as `/api/integrations/sync`, with `selectedToolkits: ["manual_upload"]`.
 
+### `GET /api/live/upload`
+
+Product-facing API contract for file intake. This is the route to show in the UI and submission
+materials because it reads like an external product API instead of an internal integration route.
+
+Returns:
+
+```json
+{
+  "ok": true,
+  "product": "Context Surgeon Live API",
+  "endpoint": "POST /api/live/upload",
+  "auth": "Firebase ID token in Authorization: Bearer <token>",
+  "contentType": "multipart/form-data"
+}
+```
+
+### `POST /api/live/upload`
+
+Product-facing alias for manual evidence upload. It accepts the same authenticated multipart payload
+as `/api/integrations/upload`, then returns normalized candidate sources.
+
+Example:
+
+```bash
+curl -X POST https://contextsurgeon.fnctn.io/api/live/upload \
+  -H 'Authorization: Bearer <FIREBASE_ID_TOKEN>' \
+  -F 'files=@owner-email.txt'
+```
+
 ### `GET /api/integrations/sources`
 
 Returns the last normalized source contract shape. The current hackathon implementation returns the deterministic sync shape; production should persist per-user connector runs and return the latest stored run.
