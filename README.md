@@ -4,6 +4,10 @@ Context Surgeon is a Big Berlin Hack submission for property-management context 
 
 The demo property is `Sonnenallee 44, 12045 Berlin`. The core claim is simple: agents fail when their context is stale, contradictory, or unverifiable. Context Surgeon fixes the context before agents act on the business.
 
+Live product: [contextsurgeon.fnctn.io](https://contextsurgeon.fnctn.io/)
+
+Public repository: [github.com/blah-mad/context-surgeon](https://github.com/blah-mad/context-surgeon)
+
 ## Hackathon Fit
 
 Primary tracks:

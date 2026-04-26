@@ -8,6 +8,10 @@ Current production URL:
 
 `https://contextsurgeon.fnctn.io/`
 
+Public repository:
+
+`https://github.com/blah-mad/context-surgeon`
+
 Current deployed Worker version:
 
 `a466a871-dcf6-452e-8288-dd624415ff2f`
@@ -40,7 +44,7 @@ Current implementation includes:
 Still not fully finished:
 
 - Current verification pass: landing/workbench UX, sample-data loop, graph modal, public API proof routes, protected unauthenticated failures, and browser demo-mode manual upload/promote were verified. API-route tests now cover unauthenticated workspace/export/integration protection and Composio public status. Still verify with a real signed-in Firebase browser session if credentials are available; this session's in-app browser showed signed-out state, so no OAuth/third-party permission prompts were opened. Do not store credentials or test-account details in the repo.
-- Public GitHub repo and submission video still need to be produced.
+- Submission video still needs to be produced/uploaded.
 
 The selected main project is `Context Surgeon`.
 
