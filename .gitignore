@@ -1,0 +1,10 @@
+.next/
+.open-next/
+node_modules/
+dist/
+.wrangler/
+.env
+.env.local
+coverage/
+*.tsbuildinfo
+firebase-debug.log

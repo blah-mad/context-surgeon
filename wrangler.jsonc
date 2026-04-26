@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "context-surgeon",
+  "account_id": "34bb0b7abee7d135f8283c9bc69a32c0",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "CONTEXT_SURGEON_DB",
+      "database_name": "context-surgeon-db",
+      "database_id": "94ae849b-6b44-40c1-b21c-20309d9e5c6f"
+    }
+  ],
+  "placement": { "mode": "smart" },
+  "routes": [
+    { "pattern": "contextsurgeon.fnctn.io", "custom_domain": true }
+  ]
+}

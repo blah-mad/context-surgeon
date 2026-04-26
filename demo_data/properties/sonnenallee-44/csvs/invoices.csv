@@ -1,0 +1,5 @@
+invoice_id,vendor,property,amount,status
+INV-2048,Dachkraft Berlin GmbH,Sonnenallee 44,EUR 4200,received
+INV-2049,TempSeal Notdienst,Sonnenallee 44,EUR 650,draft
+INV-2050,Berlin Wasser,Sonnenallee 44,EUR 180,paid
+
