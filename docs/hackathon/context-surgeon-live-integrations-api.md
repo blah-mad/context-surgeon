@@ -66,6 +66,20 @@ Public/demo proof routes never expose user account data.
 
 ## API Reference
 
+Product-facing live API routes:
+
+| Route | Job |
+|---|---|
+| `GET /api/live/connectors` | List supported connectors and current connection state. |
+| `POST /api/live/connect` | Create a Composio OAuth connect link for one connector. |
+| `POST /api/live/sync` | Sync selected connected systems into candidate sources. |
+| `GET/POST /api/live/upload` | Document and accept authenticated manual file evidence. |
+| `GET/POST /api/live/rules` | Inspect or activate ingestion rules for new evidence. |
+| `GET /api/live/sources` | Inspect normalized candidate-source output. |
+
+The `/api/integrations/*` routes are internal implementation routes used by the workbench. The
+`/api/live/*` routes are the product API surface to show in demos and docs.
+
 ### `GET /api/providers/composio/status`
 
 Public status and contract proof.
@@ -91,9 +105,13 @@ Returns:
 
 Lists supported connectors and connection state. Without auth or without live env, it returns a safe demo catalog. With auth and live env, it asks Composio for connected accounts scoped to the Firebase user id.
 
+Product alias: `GET /api/live/connectors`.
+
 ### `POST /api/integrations/connect`
 
 Creates a Composio OAuth connect link.
+
+Product alias: `POST /api/live/connect`.
 
 Request:
 
@@ -145,6 +163,8 @@ Request:
 ### `POST /api/integrations/sync`
 
 Fetches records from selected connected systems and normalizes them into the same source contract the compiler already understands.
+
+Product alias: `POST /api/live/sync`.
 
 Request:
 
@@ -198,6 +218,8 @@ files are accepted with filename/type/size provenance and can be enriched by the
 
 Response shape is the same as `/api/integrations/sync`, with `selectedToolkits: ["manual_upload"]`.
 
+Product alias: `POST /api/live/upload`.
+
 ### `GET /api/live/upload`
 
 Product-facing API contract for file intake. This is the route to show in the UI and submission
@@ -232,13 +254,19 @@ curl -X POST https://contextsurgeon.fnctn.io/api/live/upload \
 
 Returns the last normalized source contract shape. The current hackathon implementation returns the deterministic sync shape; production should persist per-user connector runs and return the latest stored run.
 
+Product alias: `GET /api/live/sources`.
+
 ### `GET /api/integrations/rules`
 
 Returns the default rule contract for live monitoring.
 
+Product alias: `GET /api/live/rules`.
+
 ### `POST /api/integrations/rules`
 
 Activates a scoped ingestion rule.
+
+Product alias: `POST /api/live/rules`.
 
 Request:
 

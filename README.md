@@ -101,6 +101,11 @@ below remain Firebase-protected for persisted D1 workspace operations.
 | `GET/POST` | `/api/live/upload` | Product-facing live API for file-to-candidate-source upload; `GET` returns the contract, `POST` accepts multipart files | Firebase ID token for `POST` |
 | `GET/POST` | `/api/integrations/rules` | Inspect or activate scoped ingestion rules for new email/file/CRM/ticket/work updates | Firebase ID token for activation |
 | `GET` | `/api/integrations/sources` | Return normalized connector source contract | Firebase ID token |
+| `GET` | `/api/live/connectors` | Product-facing connector catalog and connection state | Public demo, live with Firebase token |
+| `GET/POST` | `/api/live/connect` | Product-facing OAuth connect-link API | Firebase ID token for `POST` |
+| `GET/POST` | `/api/live/sync` | Product-facing connector sync API | Firebase ID token for `POST` |
+| `GET/POST` | `/api/live/rules` | Product-facing ingestion-rule API | Firebase ID token for live activation |
+| `GET` | `/api/live/sources` | Product-facing candidate-source inspection API | Firebase ID token |
 
 `/api/workspace/action` accepts:
 
@@ -149,7 +154,7 @@ pnpm build
 pnpm cf:build
 ```
 
-Production verification completed on April 26, 2026 for Worker version `70d0cb60-316d-4a4d-b47f-c8c1bf17f68e`:
+Production verification completed on April 26, 2026 for Worker version `0bb260e8-de69-4fdc-add1-84eb0a74c7a2`:
 
 - `GET /api/health` reports live provider and live integration mode.
 - `GET /api/providers/composio/status` reports 17 supported toolkits and configured Composio mode.
@@ -157,7 +162,7 @@ Production verification completed on April 26, 2026 for Worker version `70d0cb60
 - Authenticated live mode can create a Gmail OAuth link, normalize synced connector records into candidate sources, activate an ingestion rule, upload a manual evidence file, and read normalized source contracts.
 - The `/demo` guided loop was verified in the in-app browser: compile, human note, new email, Fact Patch, apply patch, and Agent Check all reach the expected visible states.
 - Manual upload was verified with a synthetic text file in browser demo mode; the file became a candidate source and was promoted into the compiler ledger.
-- `GET /api/live/upload` returns the product API contract, and unauthenticated `POST /api/live/upload` correctly returns `401`.
+- Product-facing live API routes for connectors, connect, sync, upload, rules, and sources return their contracts/catalogs; unauthenticated `POST` routes correctly return `401`.
 
 Useful local API checks:
 
@@ -318,8 +323,13 @@ The product boundary is intentional:
 
 Product API surface for live mode:
 
+- `GET /api/live/connectors` returns supported connectors and connection state.
+- `POST /api/live/connect` creates a Composio OAuth connect link for a connector such as Gmail or HubSpot.
+- `POST /api/live/sync` syncs selected connected systems into candidate sources.
 - `GET /api/live/upload` returns the upload contract and cURL example.
 - `POST /api/live/upload` accepts `multipart/form-data` with one or more `files`.
+- `GET/POST /api/live/rules` inspects or activates scoped ingestion rules for new email, file, CRM, support, and work updates.
+- `GET /api/live/sources` returns the candidate-source contract for compiler intake.
 - The response is the same candidate-source contract used by the live intake UI: source metadata, confidence, fact candidates, and next actions.
 - The endpoint requires a Firebase ID token so uploaded evidence remains scoped to the signed-in workspace.
 

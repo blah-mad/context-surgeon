@@ -738,6 +738,13 @@ function ApiSection() {
     "  -H 'Authorization: Bearer <FIREBASE_ID_TOKEN>' \\",
     "  -F 'files=@owner-email.txt'"
   ];
+  const endpoints = [
+    ["GET", "/api/live/connectors", "Connector catalog"],
+    ["POST", "/api/live/connect", "OAuth link"],
+    ["POST", "/api/live/sync", "Sync systems"],
+    ["POST", "/api/live/upload", "Upload evidence"],
+    ["POST", "/api/live/rules", "Ingestion rule"]
+  ];
 
   return (
     <section id="api" className="surface-fill border-b border-border px-5 py-20 sm:px-6">
@@ -748,14 +755,14 @@ function ApiSection() {
             Upload evidence without opening the UI.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
-            The first product API is intentionally narrow: send files, receive normalized candidate
-            sources, then approve them into the same compiler, graph, and Fact Patch workflow.
+            The API mirrors live mode: list connectors, create connect links, sync systems, upload
+            evidence, and activate scoped ingestion rules.
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             {[
-              ["01", "Upload files"],
-              ["02", "Review sources"],
-              ["03", "Compile patch"]
+              ["01", "Connect"],
+              ["02", "Normalize"],
+              ["03", "Patch"]
             ].map(([step, label]) => (
               <div key={step} className="bg-fill rounded-2xl border border-border p-4">
                 <p className="font-mono text-xs text-primary">{step}</p>
@@ -780,6 +787,15 @@ function ApiSection() {
           <pre className="mt-5 overflow-x-auto rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-7 text-cream/78">
             <code>{code.join("\n")}</code>
           </pre>
+          <div className="mt-4 grid gap-2">
+            {endpoints.map(([method, path, label]) => (
+              <div key={path} className="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-3 sm:grid-cols-[66px_1fr_auto] sm:items-center">
+                <span className="font-mono text-xs text-primary">{method}</span>
+                <span className="font-mono text-xs text-cream/72">{path}</span>
+                <span className="text-xs font-semibold text-cream/58">{label}</span>
+              </div>
+            ))}
+          </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
               <UploadCloud className="size-4 text-primary" />

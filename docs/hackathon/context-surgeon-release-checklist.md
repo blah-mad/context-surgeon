@@ -6,7 +6,7 @@ Use this checklist before submitting, recording, or presenting Context Surgeon. 
 
 ## Latest Verification Pass
 
-Completed on April 26, 2026 after deploying Worker version `70d0cb60-316d-4a4d-b47f-c8c1bf17f68e`:
+Completed on April 26, 2026 after deploying Worker version `0bb260e8-de69-4fdc-add1-84eb0a74c7a2`:
 
 - `pnpm lint`, `pnpm test`, `pnpm build`, and `pnpm cf:build` passed.
 - Production `/api/health` returned `ok: true`, `runtime: cloudflare-open-next-ready`, `persistence: cloudflare-d1`, `auth: firebase-auth`, `providerMode: live`, and `integrationsMode: live`.
@@ -17,7 +17,7 @@ Completed on April 26, 2026 after deploying Worker version `70d0cb60-316d-4a4d-b
 - `/demo` guided loop was verified in browser: compile, human note, new email, Fact Patch, apply patch, and Agent Check.
 - `/demo` Qontext graph modal was visually verified.
 - Browser demo-mode manual upload was verified with a synthetic text fixture and promoted into the compiler ledger.
-- Product-facing `GET /api/live/upload` returns the API contract; unauthenticated `POST /api/live/upload` returns `401`.
+- Product-facing live API routes for connectors, connect, sync, upload, rules, and sources are exposed; unauthenticated `POST /api/live/connect`, `POST /api/live/sync`, and `POST /api/live/upload` return `401`.
 
 ## Product Readiness
 
