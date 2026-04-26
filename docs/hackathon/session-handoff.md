@@ -14,7 +14,7 @@ Public repository:
 
 Current deployed Worker version:
 
-`a466a871-dcf6-452e-8288-dd624415ff2f`
+`6437020a-4207-4036-a797-a12097afe84c`
 
 Current implementation includes:
 

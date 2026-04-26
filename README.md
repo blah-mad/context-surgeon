@@ -148,7 +148,7 @@ pnpm build
 pnpm cf:build
 ```
 
-Production verification completed on April 26, 2026 for Worker version `a466a871-dcf6-452e-8288-dd624415ff2f`:
+Production verification completed on April 26, 2026 for Worker version `6437020a-4207-4036-a797-a12097afe84c`:
 
 - `GET /api/health` reports live provider and live integration mode.
 - `GET /api/providers/composio/status` reports 17 supported toolkits and configured Composio mode.

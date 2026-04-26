@@ -6,7 +6,7 @@ Use this checklist before submitting, recording, or presenting Context Surgeon. 
 
 ## Latest Verification Pass
 
-Completed on April 26, 2026 after deploying Worker version `a466a871-dcf6-452e-8288-dd624415ff2f`:
+Completed on April 26, 2026 after deploying Worker version `6437020a-4207-4036-a797-a12097afe84c`:
 
 - `pnpm lint`, `pnpm test`, `pnpm build`, and `pnpm cf:build` passed.
 - Production `/api/health` returned `ok: true`, `runtime: cloudflare-open-next-ready`, `persistence: cloudflare-d1`, `auth: firebase-auth`, `providerMode: live`, and `integrationsMode: live`.

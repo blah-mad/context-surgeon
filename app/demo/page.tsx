@@ -516,15 +516,10 @@ function providerStatusFromPayload(
   const health = String(payload.status?.health ?? "ok");
   const effectiveMode = String(payload.status?.effectiveMode ?? payload.mode ?? "mock");
   const fallbackUsed = payload.fallback?.used === true || effectiveMode !== "live";
-  const reason =
-    typeof payload.fallback?.reason === "string" && payload.fallback.reason.length > 0
-      ? payload.fallback.reason
-      : detail;
-
   return {
     mode: effectiveMode,
     status: health === "degraded" || fallbackUsed ? "fallback" : "ready",
-    detail: health === "degraded" ? reason : detail
+    detail: health === "degraded" || fallbackUsed ? "cached fallback" : detail
   };
 }
 
